@@ -2,7 +2,7 @@
 Pre-Requisite
 ---
 - `kubectl` installed
-- `awscli` installed
+- `awscli` installed -> auth first using `awscli configure` -> `create new key`
 - `eksctl` installed
 
 ---
