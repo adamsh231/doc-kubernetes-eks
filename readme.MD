@@ -27,6 +27,7 @@ Main
     - source: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role
     - additional source: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
   - Create New Node Group in `EKS`  
+    - Add cloudwatch metric to `auto scaling group` -> optional
     - source: http://www.scalingbits.com/aws/cloudformation/amiids -> ami ids
     - Run `kubectl get node` to ensure the node is connected and status id `Ready`
 
