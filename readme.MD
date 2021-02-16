@@ -4,7 +4,7 @@ Pre-Requisite
 - `kubectl` installed
 - `awscli` installed
 - `eksctl` installed
---------------------------------------------------------------------------------------------------------
+
 ---
 Main
 ---
