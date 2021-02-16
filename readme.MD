@@ -25,6 +25,7 @@ Main
     2. AmazonEC2ContainerRegistryReadOnly
     3. AmazonEKS_CNI_Policy
     - source: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role
+    - additional source: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
   - Create New Node Group in `EKS`  
 
   
