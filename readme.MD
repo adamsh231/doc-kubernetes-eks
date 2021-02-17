@@ -12,6 +12,7 @@ Main
   - EKS -> EKS Cluster
 2. Create `VPC` for `EKS`
   - Use `Cloud Formation` -> https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
+  - Configure `subnet` for `auto assign ipv4` -> https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
 3. Create `EKS` cluster
   - Use `VPC`, `IAM`, and `Security Group` added before
 4. Once cluster is `Active`
@@ -19,7 +20,6 @@ Main
   - Note: if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` and run command above again
   - Run `kubectl get svc` for ensuring kubectl get connected tok `EKS`
 5. Create Node Group from `EKS` Cluster
-  - Configure `subnet` for `auto assign ipv4` -> https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
   - Create `IAM` Roles for node cluster
     1. AmazonEKSWorkerNodePolicy
     2. AmazonEC2ContainerRegistryReadOnly
