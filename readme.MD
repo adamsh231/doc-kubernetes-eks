@@ -33,5 +33,5 @@ Main
   
 --------------------------------------------------------------------------------------------------------
 
-source: https://logz.io/blog/amazon-eks-cluster/
-additional source: https://www.padok.fr/en/blog/application-load-balancer-aws (ingress)
+- source: https://logz.io/blog/amazon-eks-cluster/
+- additional source: https://www.padok.fr/en/blog/application-load-balancer-aws (ingress)
