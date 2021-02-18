@@ -44,5 +44,5 @@ Main
   Value: 1
 
 ------ For private subnets ------
-Key: kubernetes.io/role/internal-elb
-Value: 1
+- Key: kubernetes.io/role/internal-elb
+  Value: 1
