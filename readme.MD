@@ -13,6 +13,18 @@ Main
 2. Create `VPC` for `EKS`
   - Use `Cloud Formation` -> https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
   - Configure `subnet` for `auto assign ipv4` -> https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+  -----------------
+  - ------ For public subnets ------
+- Key: kubernetes.io/cluster/<CLUSTERNAME>
+  Value: shared
+
+  - Key: kubernetes.io/role/elb
+    Value: 1
+
+  ------ For private subnets ------
+  - Key: kubernetes.io/role/internal-elb
+    Value: 1
+  ---------------------
 3. Create `EKS` cluster
   - Use `VPC`, `IAM`, and `Security Group` added before
 4. Once cluster is `Active`
@@ -36,13 +48,4 @@ Main
 - source: https://logz.io/blog/amazon-eks-cluster/
 - additional source: https://www.padok.fr/en/blog/application-load-balancer-aws (ingress)
 
------- For public subnets ------
-- Key: kubernetes.io/cluster/<CLUSTERNAME>
-  Value: shared
 
-- Key: kubernetes.io/role/elb
-  Value: 1
-
------- For private subnets ------
-- Key: kubernetes.io/role/internal-elb
-  Value: 1
