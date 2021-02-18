@@ -35,3 +35,14 @@ Main
 
 - source: https://logz.io/blog/amazon-eks-cluster/
 - additional source: https://www.padok.fr/en/blog/application-load-balancer-aws (ingress)
+
+------ For public subnets ------
+- Key: kubernetes.io/cluster/<CLUSTERNAME>
+  Value: shared
+
+- Key: kubernetes.io/role/elb
+  Value: 1
+
+------ For private subnets ------
+Key: kubernetes.io/role/internal-elb
+Value: 1
