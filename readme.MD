@@ -55,6 +55,9 @@ Ingress with ALB Controller
 - kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"
 - helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=<k8s-cluster-name> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller
 - Install ingress resource to service just `NodePort` -> https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1695
+- Dont forget to annotate https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
+- `kubernetes.io/ingress.class: alb`
+- `alb.ingress.kubernetes.io/scheme: internet-facing`
 
 --------------------------------------------------------------------------------------------------------
 
