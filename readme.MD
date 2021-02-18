@@ -25,7 +25,6 @@ Main
     2. AmazonEC2ContainerRegistryReadOnly
     3. AmazonEKS_CNI_Policy
     - source: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role
-    - additional source: https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
   - Create New Node Group in `EKS`  
     - Add cloudwatch metric to `auto scaling group` -> optional
     - source: http://www.scalingbits.com/aws/cloudformation/amiids -> ami ids
@@ -35,3 +34,4 @@ Main
 --------------------------------------------------------------------------------------------------------
 
 source: https://logz.io/blog/amazon-eks-cluster/
+additional source: https://www.padok.fr/en/blog/application-load-balancer-aws (ingress)
