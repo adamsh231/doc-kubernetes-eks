@@ -63,5 +63,6 @@ Ingress with ALB Controller
 
 - source: https://logz.io/blog/amazon-eks-cluster/
 - source ingress: https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller
-
-
+- source 1 ingress multiple namespace:
+  1. https://www.padok.fr/en/blog/application-load-balancer-aws
+  2. https://stackoverflow.com/questions/58739513/google-kubernetes-engine-how-to-define-one-ingress-for-multiple-namespaces
