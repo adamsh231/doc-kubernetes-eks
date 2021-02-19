@@ -46,7 +46,7 @@ Main
 ---
 Ingress with ALB Controller
 ---
-- `eksctl utils associate-iam-oidc-provider --region ${AWS_REGION} --cluster eksworkshop-eksctl --approve`
+- `eksctl utils associate-iam-oidc-provider --region <AWS_REGION> --cluster <CLUSTER_NAME> --approve`
 - `curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json`
 - `aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam-policy.json`
 - `eksctl create iamserviceaccount --cluster=<cluster-name> --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::<AWS_ACCOUNT_ID>:policy/AWSLoadBalancerControllerIAMPolicy --approve` --> check cloud formation for duplicate service account (use service account instead of IAM role)
