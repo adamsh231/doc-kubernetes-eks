@@ -69,3 +69,4 @@ Ingress with ALB Controller
 
 -------------------------------------------------------------------------------------------------------- 
 - https://github.com/nginxinc/kubernetes-ingress/issues/450 -> masih issue ingress not nginx
+- https://www.eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/
