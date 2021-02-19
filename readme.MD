@@ -16,11 +16,11 @@ Main
   - Configure your subnet tags as mention below
 -----------------
   - ------ For public subnets ------
-  - Key: kubernetes.io/cluster/<CLUSTERNAME>
-    Value: shared
+  - Key: `kubernetes.io/cluster/<CLUSTERNAME>`
+    Value: `shared`
 
-  - Key: kubernetes.io/role/elb
-    Value: 1
+  - Key: `kubernetes.io/role/elb`
+    Value: `1`
 
   ------ For private subnets ------
   - Key: kubernetes.io/role/internal-elb
