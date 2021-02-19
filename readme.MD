@@ -66,3 +66,6 @@ Ingress with ALB Controller
 - source 1 ingress multiple namespace:
   1. https://www.padok.fr/en/blog/application-load-balancer-aws
   2. https://stackoverflow.com/questions/58739513/google-kubernetes-engine-how-to-define-one-ingress-for-multiple-namespaces
+
+-------------------------------------------------------------------------------------------------------- 
+- https://github.com/nginxinc/kubernetes-ingress/issues/450 -> masih issue ingress not nginx
