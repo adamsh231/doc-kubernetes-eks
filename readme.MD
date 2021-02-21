@@ -68,5 +68,8 @@ Ingress with ALB Controller
   2. https://stackoverflow.com/questions/58739513/google-kubernetes-engine-how-to-define-one-ingress-for-multiple-namespaces
 
 -------------------------------------------------------------------------------------------------------- 
-- https://github.com/nginxinc/kubernetes-ingress/issues/450 -> masih issue ingress not nginx
-- https://www.eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/
+- https://www.eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/ (SOLVED)
+
+- https://itnext.io/kubernetes-update-aws-route53-dns-from-an-ingress-1c3a8068f9fe -> route 53
+- custom ingress controller
+--------------------------------------------------------------------------------------------------------
