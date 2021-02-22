@@ -105,8 +105,7 @@ AWS Certificate Manager
 ---
 1. Create public
 2. DNS issue -> on validate page auto create
-3. Until `issued` state, Add annotate `alb.ingress.kubernetes.io/certificate-arn:<arn-certificate>`
-4. Open port 443 to SG 
+3. Until `issued` state, Add annotate `alb.ingress.kubernetes.io/certificate-arn:<arn-certificate>` & `alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'`
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
