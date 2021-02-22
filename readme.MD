@@ -92,7 +92,7 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
     }
 ```
 4. Install External dns with bitnami -> `helm repo add bitnami https://charts.bitnami.com/bitnami`
-5. `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m --set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN> -n kube-system`
+5. `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system` optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`
   - RELEASE_NAME - name of the helm release, can be anything you want (external-dns for example)
   - DOMAIN_FILTER - name of your Route53 hosted zone, if *.example.com would be example.com. You can find this information in the AWS console (Route53)
   - HOSTED_ZONE_ID - id of your hosted zone in AWS. You can find this information in the AWS console (Route53)
