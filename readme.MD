@@ -59,6 +59,47 @@ Ingress with ALB Controller
 - `kubernetes.io/ingress.class: alb`
 - `alb.ingress.kubernetes.io/scheme: internet-facing`
 
+---
+External DNS 
+---
+1. Register or transfer domain to Route53
+2. Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
+3. Add policies, add to NODE-ROLE
+```{
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "route53:ChangeResourceRecordSets"
+          ],
+          "Resource": [
+            "arn:aws:route53:::hostedzone/*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "route53:ListHostedZones",
+            "route53:ListResourceRecordSets"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ]
+    }
+```
+4. Install External dns with bitnami -> `helm repo add bitnami https://charts.bitnami.com/bitnami`
+5. `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m --set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN> -n kube-system`
+  - RELEASE_NAME - name of the helm release, can be anything you want (external-dns for example)
+  - DOMAIN_FILTER - name of your Route53 hosted zone, if *.example.com would be example.com. You can find this information in the AWS console (Route53)
+  - HOSTED_ZONE_ID - id of your hosted zone in AWS. You can find this information in the AWS console (Route53)
+  - ROLE_ARN - ARN of the role you created earlier in the tutorial
+6. Add Ingress resource with annotation `external-dns.alpha.kubernetes.io/hostname: myservice.example.com ` 
+- Debugging with `kubectl logs -n kube-system <EXTERNAL_DNS_POD_NAME>`
+
+
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
