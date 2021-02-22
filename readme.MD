@@ -70,6 +70,6 @@ Ingress with ALB Controller
 -------------------------------------------------------------------------------------------------------- 
 - https://www.eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/ (SOLVED)
 
-- https://itnext.io/kubernetes-update-aws-route53-dns-from-an-ingress-1c3a8068f9fe -> route 53
+- https://www.padok.fr/en/blog/external-dns-route53-eks -> route 53
 - custom ingress controller -> use annotate
 --------------------------------------------------------------------------------------------------------
