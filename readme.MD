@@ -105,7 +105,7 @@ AWS Certificate Manager
 ---
 1. Create public
 2. DNS issue -> on validate page auto create
-3. Until `issued` state, Add certificate to ALB 
+3. Until `issued` state, Add annotate `alb.ingress.kubernetes.io/certificate-arn:<arn-certificate>`
 4. Open port 443 to SG 
 --------------------------------------------------------------------------------------------------------
 
