@@ -65,7 +65,8 @@ External DNS
 1. Register or transfer domain to Route53
 2. Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
 3. Add policies, add to NODE-ROLE
-```{
+```
+  {
       "Version": "2012-10-17",
       "Statement": [
         {
