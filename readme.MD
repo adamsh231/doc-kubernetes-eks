@@ -104,7 +104,9 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 AWS Certificate Manager
 ---
 1. Create public
-2. DNS issue
+2. DNS issue -> on validate page auto create
+3. Until `issued` state, Add certificate to ALB 
+4. Open port 443 to SG 
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
