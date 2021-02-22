@@ -60,7 +60,7 @@ Ingress with ALB Controller
 - `alb.ingress.kubernetes.io/scheme: internet-facing`
 
 ---
-External DNS 
+External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 ---
 1. Register or transfer domain to Route53
 2. Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
@@ -100,7 +100,6 @@ External DNS
 6. Add Ingress resource with annotation `external-dns.alpha.kubernetes.io/hostname: myservice.example.com ` 
 - Debugging with `kubectl logs -n kube-system <EXTERNAL_DNS_POD_NAME>`
 
-
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
@@ -110,8 +109,5 @@ External DNS
   2. https://stackoverflow.com/questions/58739513/google-kubernetes-engine-how-to-define-one-ingress-for-multiple-namespaces
 
 -------------------------------------------------------------------------------------------------------- 
-- https://www.eksworkshop.com/beginner/130_exposing-service/ingress_controller_alb/ (SOLVED)
-
-- https://www.padok.fr/en/blog/external-dns-route53-eks -> route 53
 - custom ingress controller -> use annotate
 --------------------------------------------------------------------------------------------------------
