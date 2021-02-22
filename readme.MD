@@ -100,6 +100,11 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 6. Add Ingress resource with annotation `external-dns.alpha.kubernetes.io/hostname: myservice.example.com ` 
 - Debugging with `kubectl logs -n kube-system <EXTERNAL_DNS_POD_NAME>`
 
+---
+AWS Certificate Manager
+---
+1. Create public
+2. DNS issue
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
