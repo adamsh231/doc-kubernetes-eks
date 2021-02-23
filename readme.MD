@@ -1,31 +1,40 @@
 ---
 Pre-Requisite
 ---
-- `kubectl` installed : https://v1-16.docs.kubernetes.io/docs/tasks/tools/install-kubectl/
-- `awscli` installed -> auth first using `awscli configure` -> `create new key`
-- `eksctl` installed : https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+- `kubectl` installed   : https://v1-16.docs.kubernetes.io/docs/tasks/tools/install-kubectl/
+- `awscli` installed    : https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
+  - Run `aws configure`
+  - Fill access key with yout aws account or use another way to connect your aws account
+- `eksctl` installed    : https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 
 ---
 Main
 ---
-1. Create `IAM` Roles
-  - EKS -> EKS Cluster
-2. Create `VPC` for `EKS`
-  - Use `Cloud Formation` -> https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
-  - Configure `subnet` for `auto assign ipv4` -> https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
-  - Configure your subnet tags as mention below
------------------
-  - ------ For public subnets ------
-  - Key: `kubernetes.io/cluster/<CLUSTERNAME>`
-    Value: `shared`
+- Create `VPC` for your `EKS`
+  - Use `Cloud Formation` template            : https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
+  - Configure `Subnet` for `auto assign ipv4` : https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+    - Go to `VPC` service
+    - Click `Subnets`
+    - Edit every your `EKS's` `Subnet` 
+    - Enable `auto assign ipv4`
+  - Configure your `Subnet` tags as mention below
 
-  - Key: `kubernetes.io/role/elb`
-    Value: `1`
+```
+  - ------ For public subnets ------
+    Key   : kubernetes.io/cluster/<CLUSTERNAME>
+    Value : shared
+
+    Key   : kubernetes.io/role/elb
+    Value : 1
 
   ------ For private subnets ------
-  - Key: kubernetes.io/role/internal-elb
-    Value: 1
----------------------
+    Key   : kubernetes.io/role/internal-elb
+    Value : 1
+```
+
+- Create `IAM` Roles for EKS
+  - EKS -> EKS Cluster
+
 3. Create `EKS` cluster
   - Use `VPC`, `IAM`, and `Security Group` added before
 4. Once cluster is `Active`
