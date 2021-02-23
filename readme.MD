@@ -1,6 +1,7 @@
 ---
-Pre-Requisite : Install this into your local system
+Pre-Requisite
 ---
+Install required tools below into your local system
 - `kubectl` installed   : https://v1-16.docs.kubernetes.io/docs/tasks/tools/install-kubectl/
 - `awscli` installed    : https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
   - Run `aws configure`
@@ -53,7 +54,8 @@ Main
 - Connect local `Kubectl` to connect your `EKS` clusrer
   - Wait until your `EKS` cluster is `Active`
   - Run `aws eks --region <region> update-kubeconfig --name <cluster-name>`, for connecting `kubectl` to connect your `EKS` cluster
-    - if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` for windows user and run command above again
+    - Note: if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` for windows user and run command above again
+    - Note: for not windows user, please find `kubectl` `.kube` folder in your local system installed
   - Run `kubectl get svc` for ensuring kubectl get connected to your `EKS` cluster
 
 5. Create Node Group from `EKS` Cluster
