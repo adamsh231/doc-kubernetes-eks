@@ -108,35 +108,38 @@ Ingress with ALB Controller
 ---
 External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 ---
-1. Register or transfer domain to Route53
-2. Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
-3. Add policies, add to NODE-ROLE
-```
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Action": [
-            "route53:ChangeResourceRecordSets"
-          ],
-          "Resource": [
-            "arn:aws:route53:::hostedzone/*"
-          ]
-        },
-        {
-          "Effect": "Allow",
-          "Action": [
-            "route53:ListHostedZones",
-            "route53:ListResourceRecordSets"
-          ],
-          "Resource": [
-            "*"
-          ]
-        }
-      ]
-    }
-```
+- Register or transfer domain to Route53 -> ***Pre-Requisite***
+- Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
+  - ***Note*** : if you have set `oidc` for your cluster please continue, and ignore command above
+- Create new `Policy`, add to NODE-ROLE
+  - Go to `IAM` service and Create new `Policy`
+  - Fill `Policy` json with below text
+  ```
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "route53:ChangeResourceRecordSets"
+            ],
+            "Resource": [
+              "arn:aws:route53:::hostedzone/*"
+            ]
+          },
+          {
+            "Effect": "Allow",
+            "Action": [
+              "route53:ListHostedZones",
+              "route53:ListResourceRecordSets"
+            ],
+            "Resource": [
+              "*"
+            ]
+          }
+        ]
+      }
+  ```
 4. Install External dns with bitnami -> `helm repo add bitnami https://charts.bitnami.com/bitnami`
 5. `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system` optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`
   - RELEASE_NAME - name of the helm release, can be anything you want (external-dns for example)
