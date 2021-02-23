@@ -1,5 +1,5 @@
 ---
-Pre-Requisite
+Pre-Requisite : Install this into your local system
 ---
 - `kubectl` installed   : https://v1-16.docs.kubernetes.io/docs/tasks/tools/install-kubectl/
 - `awscli` installed    : https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html
