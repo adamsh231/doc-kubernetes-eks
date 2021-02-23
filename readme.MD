@@ -11,14 +11,29 @@ Pre-Requisite
 Main
 ---
 - Create `VPC` for your `EKS`
-  - Use `Cloud Formation` template            : https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
-  - Configure `Subnet` for `auto assign ipv4` : https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
+  - Go to `CloudFormation` service
+  - Create new `Stack`
+  - Use `CloudFormation` template : https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
+  - Configure `Subnet` for `Modify auto-assign IP setting` : https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip
     - Go to `VPC` service
     - Click `Subnets`
     - Edit every your `EKS's` `Subnet` 
-    - Enable `auto assign ipv4`
-  - Configure your `Subnet` tags as mention below
+    - Enable `Modify auto-assign IP setting`
 
+- Create `IAM` Roles for EKS
+  - Go to `IAM` service
+  - Create role
+  - Choose `EKS` then `EKS Cluster`
+
+- Create `EKS` cluster
+  - Go to `EKS` service
+  - Create new cluster
+  - Choose `Role` with `IAM Role` your created before
+  - Choose `VPC` with `VPC` your `Stack` created before
+  - Choose `Security Group` with `Security Group` your `Stack` created before
+  - `Enable logging` -> optional
+
+- Configure your `Subnet` tags as mention below
 ```
   - ------ For public subnets ------
     Key   : kubernetes.io/cluster/<CLUSTERNAME>
@@ -32,11 +47,6 @@ Main
     Value : 1
 ```
 
-- Create `IAM` Roles for EKS
-  - EKS -> EKS Cluster
-
-3. Create `EKS` cluster
-  - Use `VPC`, `IAM`, and `Security Group` added before
 4. Once cluster is `Active`
   - Run `aws eks --region <region> update-kubeconfig --name <cluster-name>` -> tell `kubectl` to connect `EKS`
   - Note: if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` and run command above again
