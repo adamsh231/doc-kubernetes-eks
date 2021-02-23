@@ -144,7 +144,8 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
   - Attach `Policy` to the `IAM Role` your worker node
 - Install External dns with bitnami
   - Run `helm repo add bitnami https://charts.bitnami.com/bitnami`
-  - Run `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system` ~~optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`~~
+  - Run `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system`
+  -  ~~optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`~~
     - RELEASE_NAME    : Name of the helm release, can be anything you want (external-dns for example)
     - DOMAIN_FILTER   : Name of your Route53 hosted zone, if `*.example.com` would be `example.com`. You can find this information in the AWS console (Route53)
     - HOSTED_ZONE_ID  : ID of your hosted zone in AWS. You can find this information in the AWS console (Route53)
@@ -152,7 +153,6 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 - You can add ingress resource now
   - Add host in ingress
   - Add certificate and listening port and another annotation as mention below : https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
-  ~~external-dns.alpha.kubernetes.io/hostname: myservice.example.com~~ 
   ```
   alb.ingress.kubernetes.io/certificate-arn : arn:aws:acm:xxxx:xxxxx:certificate/xxxxx
   alb.ingress.kubernetes.io/listen-ports    : '[{"HTTP": 80}, {"HTTPS": 443}]'
