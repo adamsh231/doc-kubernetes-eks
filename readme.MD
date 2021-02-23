@@ -154,7 +154,7 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
   - Add certificate and listening port and another annotation as mention below : https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
   ~~external-dns.alpha.kubernetes.io/hostname: myservice.example.com~~ 
   ```
-  alb.ingress.kubernetes.io/certificate-arn : arn:aws:acm:ap-southeast-1:770964819483:certificate/1233e25e-d638-4385-bb0a-dfaf4a63ef2c
+  alb.ingress.kubernetes.io/certificate-arn : arn:aws:acm:xxxx:xxxxx:certificate/xxxxx
   alb.ingress.kubernetes.io/listen-ports    : '[{"HTTP": 80}, {"HTTPS": 443}]'
   ```
 - Debugging pod with `kubectl logs <EXTERNAL_DNS_POD_NAME> -n kube-system`
@@ -162,9 +162,17 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 ---
 AWS Certificate Manager
 ---
-1. Create public
-2. DNS issue -> on validate page auto create
-3. Until `issued` state, Add annotate `alb.ingress.kubernetes.io/certificate-arn:<arn-certificate>` & `alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'`
+- Go to `Certificate Manager` Service
+- Request a `Public Certificate`
+- Fill required form
+- Use DNS issue
+- On validate page, create record
+- Once `issued`, copy arn and paste to annotation as mention earlier
+
+
+
+------
+Development Only
 --------------------------------------------------------------------------------------------------------
 
 - source: https://logz.io/blog/amazon-eks-cluster/
