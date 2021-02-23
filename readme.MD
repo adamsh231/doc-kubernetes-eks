@@ -98,7 +98,7 @@ Ingress with ALB Controller
   - Run `helm repo update`
   - Run `kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"`
   - Run `helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=<CLUSTER_NAME> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller`
-- You can install ingress resource now
+- You can add ingress resource now
   - ***WARNING*** : ALB Controller just read Service with `NodePort` not `CLusterIP` -> https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1695
   - Dont forget to annotate as mention below : https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
   ```
@@ -111,7 +111,7 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 - Register or transfer domain to Route53 -> ***Pre-Requisite***
 - Set identity provider `aws eks describe-cluster --name <CLUSTER_NAME> --query “cluster.identity.oidc.issuer” --output text`
   - ***Note*** : if you have set `oidc` for your cluster please continue, and ignore command above
-- Create new `Policy`, add to NODE-ROLE
+- Create new `Policy`
   - Go to `IAM` service and Create new `Policy`
   - Fill `Policy` json with below text
   ```
@@ -140,14 +140,24 @@ External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
         ]
       }
   ```
-4. Install External dns with bitnami -> `helm repo add bitnami https://charts.bitnami.com/bitnami`
-5. `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system` optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`
-  - RELEASE_NAME - name of the helm release, can be anything you want (external-dns for example)
-  - DOMAIN_FILTER - name of your Route53 hosted zone, if *.example.com would be example.com. You can find this information in the AWS console (Route53)
-  - HOSTED_ZONE_ID - id of your hosted zone in AWS. You can find this information in the AWS console (Route53)
-  - ROLE_ARN - ARN of the role you created earlier in the tutorial
-6. Add Ingress resource with annotation `external-dns.alpha.kubernetes.io/hostname: myservice.example.com ` 
-- Debugging with `kubectl logs -n kube-system <EXTERNAL_DNS_POD_NAME>`
+  - Once `Policy` created
+  - Attach `Policy` to the `IAM Role` your worker node
+- Install External dns with bitnami
+  - Run `helm repo add bitnami https://charts.bitnami.com/bitnami`
+  - Run `helm install <RELEASE_NAME> bitnami/external-dns --set provider=aws --set domainFilters[0]=<DOMAIN_FILTER> --set policy=sync --set registry=txt --set txtOwnerId=<HOSTED_ZONE_ID> --set interval=3m -n kube-system` ~~optional `--set rbac.create=true --set rbac.serviceAccountName=<RELEASE_NAME>-external-dns --set rbac.serviceAccountAnnotations.eks\.amazonaws\.com/role-arn=<ROLE_ARN>`~~
+    - RELEASE_NAME    : Name of the helm release, can be anything you want (external-dns for example)
+    - DOMAIN_FILTER   : Name of your Route53 hosted zone, if `*.example.com` would be `example.com`. You can find this information in the AWS console (Route53)
+    - HOSTED_ZONE_ID  : ID of your hosted zone in AWS. You can find this information in the AWS console (Route53)
+    ~~- ROLE_ARN        : ARN of the role you created earlier in the tutorial~~
+- You can add ingress resource now
+  - Add host in ingress
+  - Add certificate and listening port and another annotation as mention below : https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
+  ~~external-dns.alpha.kubernetes.io/hostname: myservice.example.com~~ 
+  ```
+  alb.ingress.kubernetes.io/certificate-arn : arn:aws:acm:ap-southeast-1:770964819483:certificate/1233e25e-d638-4385-bb0a-dfaf4a63ef2c
+  alb.ingress.kubernetes.io/listen-ports    : '[{"HTTP": 80}, {"HTTPS": 443}]'
+  ```
+- Debugging pod with `kubectl logs <EXTERNAL_DNS_POD_NAME> -n kube-system`
 
 ---
 AWS Certificate Manager
