@@ -33,9 +33,12 @@ Main
   - Choose `Security Group` with `Security Group` your `Stack` created before
   - `Enable logging` -> optional
 
-- Configure your `Subnet` tags as mention below
+- Configure your `Subnet` tags
+  - Go to `VPC` service
+  - Choose `Subnets` linked with your `EKS` cluster
+  - Edit your `Subnet` tags as mention below
 ```
-  - ------ For public subnets ------
+  ------- For public subnets ------
     Key   : kubernetes.io/cluster/<CLUSTERNAME>
     Value : shared
 
@@ -47,10 +50,12 @@ Main
     Value : 1
 ```
 
-4. Once cluster is `Active`
-  - Run `aws eks --region <region> update-kubeconfig --name <cluster-name>` -> tell `kubectl` to connect `EKS`
-  - Note: if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` and run command above again
-  - Run `kubectl get svc` for ensuring kubectl get connected tok `EKS`
+- Connect local `Kubectl` to connect your `EKS` clusrer
+  - Wait until your `EKS` cluster is `Active`
+  - Run `aws eks --region <region> update-kubeconfig --name <cluster-name>`, for connecting `kubectl` to connect your `EKS` cluster
+    - if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` for windows user and run command above again
+  - Run `kubectl get svc` for ensuring kubectl get connected to your `EKS` cluster
+
 5. Create Node Group from `EKS` Cluster
   - Create `IAM` Roles for node cluster
     1. AmazonEKSWorkerNodePolicy
