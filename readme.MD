@@ -72,13 +72,13 @@ Main
   - Create New Node Group in `EKS`  
   - Choose `Role` with `IAM Role` you created before
   - Choose the `EC2` spesification for your `EKS` cluster workers and `Scaling` configuration
+    - Max     : Maximal scale out instance count
+    - Min     : Minimal scale in instance count
+    - Desired : Initial instance count
   - Once `Node Group` is `Active`, Go to `EC2` service
-    - Max: maximal scale out
-    - Min: minimal scale in
-    - Desired: initial
-    - Add cloudwatch metric to `auto scaling group` -> optional
-    - source: http://www.scalingbits.com/aws/cloudformation/amiids -> ami ids
-    - Run `kubectl get node` to ensure the node is connected and status id `Ready`
+    - Check running instance, theres running instances for your `EKS` cluster, usually doesn't have name
+    - Enable cloudwatch metric to `auto scaling group` -> optional
+  - Run `kubectl get node` to ensure the node is connected and status id `Ready`
 
 ---
 Ingress with ALB Controller
