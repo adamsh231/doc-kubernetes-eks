@@ -59,13 +59,23 @@ Main
     - For not windows user, please find `kubectl` `.kube` folder in your local system installed and delete it, then run command above again.
   - Run `kubectl get svc` for ensuring kubectl get connected to your `EKS` cluster
 
-5. Create Node Group from `EKS` Cluster
-  - Create `IAM` Roles for node cluster
-    1. AmazonEKSWorkerNodePolicy
-    2. AmazonEC2ContainerRegistryReadOnly
-    3. AmazonEKS_CNI_Policy
-    - source: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role
+- Create Node Group from `EKS` Cluster
+  - Go to `IAM` service
+  - Create new `IAM` Roles for node cluster: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html#create-worker-node-role
+    - Choose `EC2`, then choose below policies
+      - AmazonEKSWorkerNodePolicy
+      - AmazonEC2ContainerRegistryReadOnly
+      - AmazonEKS_CNI_Policy
+  - Go to `EKS` service
+  - Choose your `EKS` cluster
+  - Choose `Configuration` and Create new `Node Group`  
   - Create New Node Group in `EKS`  
+  - Choose `Role` with `IAM Role` you created before
+  - Choose the `EC2` spesification for your `EKS` cluster workers and `Scaling` configuration
+  - Once `Node Group` is `Active`, Go to `EC2` service
+    - Max: maximal scale out
+    - Min: minimal scale in
+    - Desired: initial
     - Add cloudwatch metric to `auto scaling group` -> optional
     - source: http://www.scalingbits.com/aws/cloudformation/amiids -> ami ids
     - Run `kubectl get node` to ensure the node is connected and status id `Ready`
