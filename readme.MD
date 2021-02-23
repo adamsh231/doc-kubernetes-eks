@@ -51,11 +51,11 @@ Main
     Value : 1
 ```
 
-- Connect local `Kubectl` to connect your `EKS` clusrer
+- Connect local `kubectl` to connect your `EKS` clusrer
   - Wait until your `EKS` cluster is `Active`
   - Run `aws eks --region <region> update-kubeconfig --name <cluster-name>`, for connecting `kubectl` to connect your `EKS` cluster
     - Note: if output is `NoneType object is not iterateable`, you should delete folder `.kube` in `/Users/<user-name>/.kube` for windows user and run command above again
-    - Note: for not windows user, please find `kubectl` `.kube` folder in your local system installed
+    - Note: for not windows user, please find `kubectl` `.kube` folder in your local system installed and delete it, then run command above again.
   - Run `kubectl get svc` for ensuring kubectl get connected to your `EKS` cluster
 
 5. Create Node Group from `EKS` Cluster
