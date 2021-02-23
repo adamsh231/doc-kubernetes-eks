@@ -1,9 +1,9 @@
 ---
 Pre-Requisite
 ---
-- `kubectl` installed
+- `kubectl` installed : https://v1-16.docs.kubernetes.io/docs/tasks/tools/install-kubectl/
 - `awscli` installed -> auth first using `awscli configure` -> `create new key`
-- `eksctl` installed
+- `eksctl` installed : https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 
 ---
 Main
