@@ -180,4 +180,5 @@ Development Only
 - custom ingress controller -> use annotate
 - Helm
 - ingress group -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#ingressgroup
+- Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/
 --------------------------------------------------------------------------------------------------------
