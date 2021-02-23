@@ -7,6 +7,7 @@ Install required tools below into your local system
   - Run `aws configure`
   - Fill access key with yout aws account or use another way to connect your aws account
 - `eksctl` installed    : https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+- `helm` installed      : https://helm.sh/docs/intro/install/
 
 ---
 Main
@@ -38,18 +39,18 @@ Main
   - Go to `VPC` service
   - Choose `Subnets` linked with your `EKS` cluster
   - Edit your `Subnet` tags as mention below
-```
-  ------- For public subnets ------
-    Key   : kubernetes.io/cluster/<CLUSTERNAME>
-    Value : shared
+  ```
+    ------- For public subnets ------
+      Key   : kubernetes.io/cluster/<CLUSTERNAME>
+      Value : shared
 
-    Key   : kubernetes.io/role/elb
-    Value : 1
+      Key   : kubernetes.io/role/elb
+      Value : 1
 
-  ------ For private subnets ------
-    Key   : kubernetes.io/role/internal-elb
-    Value : 1
-```
+    ------ For private subnets ------
+      Key   : kubernetes.io/role/internal-elb
+      Value : 1
+  ```
 
 - Connect local `kubectl` to connect your `EKS` clusrer
   - Wait until your `EKS` cluster is `Active`
@@ -90,16 +91,20 @@ Ingress with ALB Controller
   - Note: the name of the file can be cuztomized
 - Create new `Policy` for your pod ALB Controller can control `ELB` service, Run `aws iam create-policy --policy-name <POLICY_NAME> --policy-document file://iam-policy.json`
   - Check in your CREATED `Policy` in `IAM` service, then go to `Customer managed policies`
-- `eksctl create iamserviceaccount --cluster=<CLUSTER-NAME> --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::<AWS_ACCOUNT_ID>:policy/<POLICY_NAME> --approve` --> check cloud formation for duplicate service account (use service account instead of IAM role)
-- `helm repo add eks https://aws.github.io/eks-charts`
-- `helm repo update`
-- `kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"`
-- `helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=<CLUSTER_NAME> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller`
-- Install ingress resource to service just `NodePort` -> https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1695
-- Dont forget to annotate https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
-- `kubernetes.io/ingress.class: alb`
-- `alb.ingress.kubernetes.io/scheme: internet-facing`
-
+- Create new `Role` for your ALB Controller, Run `eksctl create iamserviceaccount --cluster=<CLUSTER-NAME> --namespace=kube-system --name=aws-load-balancer-controller --attach-policy-arn=arn:aws:iam::<AWS_ACCOUNT_ID>:policy/<POLICY_NAME> --approve`
+  - Note: if you have run this command twice or more, you should delete the stack first in `CloudFormation`.
+- Install and Configure ALB Controller
+  - Run `helm repo add eks https://aws.github.io/eks-charts`
+  - Run `helm repo update`
+  - Run `kubectl apply -k "github.com/aws/eks-charts/stable/aws-load-balancer-controller//crds?ref=master"`
+  - Run `helm upgrade -i aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=<CLUSTER_NAME> --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller`
+- You can install ingress resource now
+  - WARNING: ALB Controller just read Service with `NodePort` not `CLusterIP` -> https://github.com/kubernetes-sigs/aws-load-balancer-controller/issues/1695
+  - Dont forget to annotate as mention below : https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#annotations
+  ```
+  kubernetes.io/ingress.class: alb
+  alb.ingress.kubernetes.io/scheme: internet-facing
+  ```
 ---
 External DNS : https://www.padok.fr/en/blog/external-dns-route53-eks
 ---
