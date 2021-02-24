@@ -85,6 +85,45 @@ spec:
 
 ---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ns-2048
+  name: deployment-graphql
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: graphql-pod
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: graphql-pod
+    spec:
+      containers:
+      - image: adamsh231/graphql
+        imagePullPolicy: Always
+        name: graphql-pod
+        ports:
+        - containerPort: 9000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ns-2048
+  name: service-graphql
+spec:
+  ports:
+    - port: 80
+      targetPort: 9000
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: graphql-pod
+
+---
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -119,5 +158,15 @@ spec:
         backend:
           service:
             name: service-php
+            port:
+              number: 80
+  - host: graphql.shoesmart-research.com
+    http:
+      paths:
+      - path: /*
+        pathType: Prefix
+        backend:
+          service:
+            name: service-graphql
             port:
               number: 80
