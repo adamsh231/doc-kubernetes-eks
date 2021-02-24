@@ -8,6 +8,7 @@ Install required tools below into your local system
   - Fill access key with yout aws account or use another way to connect your aws account
 - `eksctl` installed    : https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 - `helm` installed      : https://helm.sh/docs/intro/install/
+- `helmfile` optional   : `scoop install helmfile`
 
 ---
 Main
