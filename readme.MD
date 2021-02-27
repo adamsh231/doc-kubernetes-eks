@@ -168,7 +168,10 @@ AWS Certificate Manager
 - On validate page, create record
 - Once `issued`, copy arn and paste to annotation as mention earlier
 
-
+---
+Kubernetes Dashboard
+---
+https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
 
 ------
 Development Only
