@@ -185,4 +185,5 @@ Development Only
 - Helm
 - ingress group -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#ingressgroup
 - Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/
+- Cloudfront -> https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html#GettingStartedSignup -> ACM onlu Virginia
 --------------------------------------------------------------------------------------------------------
