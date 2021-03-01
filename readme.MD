@@ -186,4 +186,6 @@ Development Only
 - ingress group -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#ingressgroup
 - Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/
 - Cloudfront -> https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html#GettingStartedSignup -> ACM onlu Virginia
+- CDN slow -> https://community.cloudflare.com/t/using-cloudflare-cdn-slow-down-my-site-how-and-why/37878/3
+- Route Migrate -> https://lobster1234.github.io/2017/05/10/migrating-a-domain-to-amazon-route53/
 --------------------------------------------------------------------------------------------------------
