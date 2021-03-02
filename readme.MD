@@ -183,6 +183,11 @@ Option (1. User Credential, 2. Personal Access Token, 3. Deploy token)
   - Create PAT in `Edit Profile` section || All Repo Access -> Read Registry
   - Create DT in `Setting` -> `CI/CD` -> `Repository` || Spesific Repo Access -> Read Registry
   - `kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username=<your-name> --docker-password=<your-pword> -n <namespace>`
+- Into pod level yaml, change `ImagePullSecrets`
+```
+imagePullSecrets: 
+  - name: gitcred
+```
 source: https://stackoverflow.com/questions/59456507/kubernetes-gitlab-how-to-store-password-for-private-registry
 
 ------
