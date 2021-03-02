@@ -173,19 +173,25 @@ Kubernetes Dashboard
 ---
 https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
 
+---
+Pull private registry -> Gitlab
+---
+Option (1. User Credential, 2. Personal Access Token, 3. Deploy token)
+- User Credential
+  - `kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email> -n <namespace>`
+- Personal Access Token & Deploy Token
+  - Create PAT in `Edit Profile` section || All Repo Access -> Read Registry
+  - Create DT in `Setting` -> `CI/CD` -> `Repository` || Spesific Repo Access -> Read Registry
+  - `kubectl create secret docker-registry regcred --docker-server=registry.gitlab.com --docker-username=<your-name> --docker-password=<your-pword> -n <namespace>`
+source: https://stackoverflow.com/questions/59456507/kubernetes-gitlab-how-to-store-password-for-private-registry
+
 ------
 Development Only
 --------------------------------------------------------------------------------------------------------
-- source 1 ingress multiple namespace:
-  1. https://www.padok.fr/en/blog/application-load-balancer-aws
-  2. https://stackoverflow.com/questions/58739513/google-kubernetes-engine-how-to-define-one-ingress-for-multiple-namespaces
-
--------------------------------------------------------------------------------------------------------- 
 - custom ingress controller -> use annotate
 - Helm
-- ingress group -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/guide/ingress/annotations/#ingressgroup
 - Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/
-- Cloudfront -> https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html#GettingStartedSignup -> ACM onlu Virginia
+- Cloudfront -> https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html#GettingStartedSignup -> ACM only us-east-1 N-Virginia
 - CDN slow -> https://community.cloudflare.com/t/using-cloudflare-cdn-slow-down-my-site-how-and-why/37878/3
 - Route Migrate -> https://lobster1234.github.io/2017/05/10/migrating-a-domain-to-amazon-route53/
 --------------------------------------------------------------------------------------------------------
