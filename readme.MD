@@ -169,11 +169,6 @@ AWS Certificate Manager
 - Once `issued`, copy arn and paste to annotation as mention earlier
 
 ---
-Kubernetes Dashboard
----
-https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
-
----
 Pull private registry -> Gitlab
 ---
 Option (1. User Credential, 2. Personal Access Token, 3. Deploy token)
@@ -194,9 +189,7 @@ source: https://stackoverflow.com/questions/59456507/kubernetes-gitlab-how-to-st
 Development Only
 --------------------------------------------------------------------------------------------------------
 - custom ingress controller -> use annotate
-- Helm
-- Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/
+- Auto redirect -> https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/tasks/ssl_redirect/ or Manually in `ALB`
 - Cloudfront -> https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html#GettingStartedSignup -> ACM only us-east-1 N-Virginia
-- CDN slow -> https://community.cloudflare.com/t/using-cloudflare-cdn-slow-down-my-site-how-and-why/37878/3
 - Route Migrate -> https://lobster1234.github.io/2017/05/10/migrating-a-domain-to-amazon-route53/
 --------------------------------------------------------------------------------------------------------
